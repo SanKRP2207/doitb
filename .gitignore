@@ -1,0 +1,50 @@
+# === Rust build artifacts ===
+/target/
+**/*.rs.bk
+
+# === Cargo package manager ===
+Cargo.lock
+# Uncomment the above line if you are building a library, not a binary
+# For binaries, keep Cargo.lock tracked
+
+# === Logs and temp files ===
+*.log
+*.tmp
+
+# === Environment files ===
+.env
+.env.*
+!.env.example
+
+# === OS-specific files ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# === IDE / Editor files ===
+# VS Code
+.vscode/
+*.code-workspace
+
+# IntelliJ / CLion / RustRover
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# === Actix specific (optional) ===
+# If you store runtime-generated files (uploads, cache, etc.)
+/uploads/
+/cache/
+/tmp/
