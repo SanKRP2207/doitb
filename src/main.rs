@@ -3,6 +3,7 @@ use llm::openrouter::OpenRouter;
 
 mod routes;
 mod llm;
+mod memory;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
