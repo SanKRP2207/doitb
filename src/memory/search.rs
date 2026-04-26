@@ -1,13 +1,12 @@
-use sqlx::Pool;
+use sqlx::{PgPool, Row};
 use uuid::Uuid;
 
 pub async fn search_similar(
-    db: &Pool,
+    db: &PgPool,
     project_id: Uuid,
     embedding: Vec<f32>,
 ) -> anyhow::Result<Vec<String>> {
-
-    let rows = sqlx::query!(
+    let rows = sqlx::query(
         r#"
         SELECT file_path
         FROM file_embeddings
@@ -15,11 +14,16 @@ pub async fn search_similar(
         ORDER BY embedding <-> $2
         LIMIT 5
         "#,
-        project_id,
-        &embedding
     )
+    .bind(project_id)
+    .bind(&embedding)
     .fetch_all(db)
     .await?;
 
-    Ok(rows.into_iter().map(|r| r.file_path).collect())
+    let result = rows
+        .into_iter()
+        .map(|row| row.get::<String, _>("file_path"))
+        .collect();
+
+    Ok(result)
 }

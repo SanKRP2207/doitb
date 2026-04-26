@@ -6,11 +6,12 @@ edition = "2024"
 [dependencies]
 actix-web = "4.13.0"
 anyhow = "1.0.102"
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1.0.149"
 tokio = { version = "1", features = ["full"] }
 async-trait = "0.1"
 dotenv = "0.15.0"
 uuid = { version = "1", features = ["v4", "serde"] }
-sqlx = "0.8.6"
+sqlx = { version = "0.8.6", features = ["postgres", "runtime-tokio", "macros", "uuid"] }
+rand = "0.8"

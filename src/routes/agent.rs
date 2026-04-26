@@ -3,7 +3,7 @@ use serde::Deserialize;
 use uuid::Uuid;
 use crate::llm::openai::OpenAI;
 use crate::llm::openrouter::OpenRouter;
-use sqlx::Pool;
+use sqlx::PgPool;
 use crate::memory::embedding::EmbeddingService;
 use crate::memory::search::search_similar;
 
@@ -15,13 +15,15 @@ pub struct AgentRequest {
     pub project_id: Uuid,
 }
 
-#[post("/agent")]
+
 pub async fn run_agent(
     data: web::Json<AgentRequest>,
     llm: web::Data<OpenRouter>,
     pool: web::Data<PgPool>,                 // 🔥 NEW
     embedding_service: web::Data<EmbeddingService>, // 🔥 NEW
 ) -> HttpResponse {
+
+    println!("hjrnjtrhghtggg");
 
     // 1️⃣ Generate embedding from code
     let embedding = match embedding_service.generate(&data.code).await {
